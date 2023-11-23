@@ -419,6 +419,7 @@ frappe.ui.form.on("Journal Entry Account", {
 		var accountID =  frappe.get_doc(dt, dn).account;
 		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
 		if (res.root_type == "Expense" || res.root_type == "Income"){
+			frappe.msgprint("Expense or Asset");
 			rm.set_df_property("cost_center", "reqd", true);
 		}else{
 			frm.set_df_property("cost_center", "reqd", false);
