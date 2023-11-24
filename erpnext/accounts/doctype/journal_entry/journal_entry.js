@@ -425,7 +425,7 @@ frappe.ui.form.on("Journal Entry Account", {
 		}else{
 			isCostCenterRequired = 0;
 		}
-		var costCenterField = frappe.get_meta(cdt).fields.find(field => field.fieldname === 'markz_tklfa');
+		var costCenterField = frappe.get_meta(dt).fields.find(field => field.fieldname === 'markz_tklfa');
 
         if (costCenterField) {
             // Toggle the 'reqd' property of the 'cost_center' field
