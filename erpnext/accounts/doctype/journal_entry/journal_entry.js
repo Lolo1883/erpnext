@@ -416,14 +416,21 @@ frappe.ui.form.on("Journal Entry Account", {
 	},
 
 	account: function(frm, dt, dn) {
-		// var accountID =  frappe.get_doc(dt, dn).account;
-		// var values  = frappe.db.get_doc("Account", accountID).then(function(res){
-		// if (res.root_type == "Expense" || res.root_type == "Income"){
-		// 	frm.set_df_property("markz_tklfa",  "reqd", true);
-		// }else{
-		// 	frm.set_df_property("markz_tklfa",  "reqd", false);
-		// }
-		// });
+		var isCostCenterRequired =  false;
+
+		var accountID =  frappe.get_doc(dt, dn).account;
+		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
+		if (res.root_type == "Expense" || res.root_type == "Income"){
+			isCostCenterRequired = true;
+		}else{
+			isCostCenterRequired = false;
+		}
+		});
+
+		frm.set_df_property("markz_tklfa",  "reqd", isCostCenterRequired);
+
+
+
 		erpnext.journal_entry.set_account_balance(frm, dt, dn);
 	},
 
