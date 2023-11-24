@@ -396,6 +396,21 @@ cur_frm.cscript.validate = function(doc,cdt,cdn) {
 
 frappe.ui.form.on("Journal Entry Account", {
 
+	refresh:function(frm, cdt, cdn){
+
+var isCostCenterRequired =  false;
+
+		var accountID =  frappe.get_doc(cdt, cdn).account;
+		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
+		if (res.root_type == "Expense" || res.root_type == "Income"){
+			isCostCenterRequired = 1;
+		}else{
+			isCostCenterRequired = 0;
+		}
+		});
+		frm.set_df_property("markz_tklfa", "reqd", isCostCenterRequired);
+		frm.refresh_field("accounts");
+	},
 	party: function(frm, cdt, cdn) {
 		var d = frappe.get_doc(cdt, cdn);
 		if(!d.account && d.party_type && d.party) {
