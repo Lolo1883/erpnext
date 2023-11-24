@@ -416,6 +416,28 @@ frappe.ui.form.on("Journal Entry Account", {
 	},
 
 	account: function(frm, dt, dn) {
+		var row = locals[dt][dn];
+		console.log(row);
+
+		var isCostCenterRequired =  false;
+
+		var accountID =  frappe.get_doc(dt, dn).account;
+		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
+		if (res.root_type == "Expense" || res.root_type == "Income"){
+			isCostCenterRequired = 1;
+		}else{
+			isCostCenterRequired = 0;
+		}
+		var costCenterField = frappe.get_meta(dt).fields.find(field => field.fieldname === 'markz_tklfa');
+
+        if (costCenterField) {
+            // Toggle the 'reqd' property of the 'cost_center' field
+            costCenterField.reqd = isCostCenterRequired;
+			frm.set_df_property('accounts', 'markz_tklfa', 'reqd', isCostCenterRequired);
+
+        }
+
+		});
 
 
 		erpnext.journal_entry.set_account_balance(frm, dt, dn);
@@ -607,26 +629,6 @@ $.extend(erpnext.journal_entry, {
 		if(d.account) {
 			if(!frm.doc.company) frappe.throw(__("Please select Company first"));
 			if(!frm.doc.posting_date) frappe.throw(__("Please select Posting Date first"));
-
-
-		var isCostCenterRequired =  false;
-
-		var accountID =  frappe.get_doc(dt, dn).account;
-		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
-		if (res.root_type == "Expense" || res.root_type == "Income"){
-			isCostCenterRequired = 1;
-		}else{
-			isCostCenterRequired = 0;
-		}
-		var costCenterField = frappe.get_meta(dt).fields.find(field => field.fieldname === 'markz_tklfa');
-
-        if (costCenterField) {
-            // Toggle the 'reqd' property of the 'cost_center' field
-            costCenterField.reqd = isCostCenterRequired;
-			frm.set_df_property('accounts', 'markz_tklfa', 'reqd', isCostCenterRequired);
-        }
-
-		});
 
 			return frappe.call({
 				method: "erpnext.accounts.doctype.journal_entry.journal_entry.get_account_balance_and_party_type",
