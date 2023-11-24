@@ -428,7 +428,8 @@ frappe.ui.form.on("Journal Entry Account", {
 		});
 
 		console.log(frm.fields_dict);
-		frm.fields_dict['accounts'].grid.get_field('markz_tklfa').reqd = isCostCenterRequired;
+		var csCenter = frm.fields_dict['accounts'].grid.get_field('markz_tklfa');
+		csCenter.toggle_reqd(isCostCenterRequired);
 		frm.refresh_field('accounts');
 
 
