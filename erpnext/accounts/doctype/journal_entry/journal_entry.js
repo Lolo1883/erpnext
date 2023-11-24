@@ -416,27 +416,16 @@ frappe.ui.form.on("Journal Entry Account", {
 	},
 
 	account: function(frm, dt, dn) {
-		$.each(frm.doc.accounts || [], function(i, row) {
-			console.log(row.cost_center);
-		})
-
 		var isCostCenterRequired =  false;
 
 		var accountID =  frappe.get_doc(dt, dn).account;
 		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
 		if (res.root_type == "Expense" || res.root_type == "Income"){
-			isCostCenterRequired = 1;
+			isCostCenterRequired = true;
 		}else{
-			isCostCenterRequired = 0;
+			isCostCenterRequired = false;
 		}
-		var costCenterField = frappe.get_meta(dt).fields.find(field => field.fieldname === 'markz_tklfa');
-
-        if (costCenterField) {
-            // Toggle the 'reqd' property of the 'cost_center' field
-            costCenterField.reqd = isCostCenterRequired;
-			frm.set_df_property('accounts', 'markz_tklfa', 'reqd', isCostCenterRequired);
-
-        }
+		frm.set_df_property("cost_center", "reqd", isCostCenterRequired);
 
 		});
 
