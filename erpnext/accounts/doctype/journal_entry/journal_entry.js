@@ -395,6 +395,12 @@ cur_frm.cscript.validate = function(doc,cdt,cdn) {
 }
 
 frappe.ui.form.on("Journal Entry Account", {
+
+	refresh: function(frm) {
+		var field = frm.get_field("cost_center1");
+		field.$input.prop('req', true);
+	},
+
 	party: function(frm, cdt, cdn) {
 		var d = frappe.get_doc(cdt, cdn);
 		if(!d.account && d.party_type && d.party) {
