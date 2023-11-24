@@ -411,13 +411,13 @@ frappe.ui.form.on("Journal Entry Account", {
 			});
 		}
 	},
-	cost_center: function(frm, dt, dn) {
-		erpnext.journal_entry.set_account_balance(frm, dt, dn);
-	},
+	// cost_center: function(frm, dt, dn) {
+	// 	erpnext.journal_entry.set_account_balance(frm, dt, dn);
+	// },
 
 	account: function(frm, dt, dn) {
 		$.each(frm.doc.accounts || [], function(i, row) {
-			console.log(row.markz_tklfa);
+			console.log(row.cost_center);
 		})
 
 		var isCostCenterRequired =  false;
