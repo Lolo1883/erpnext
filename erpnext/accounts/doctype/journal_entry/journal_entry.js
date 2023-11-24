@@ -399,7 +399,7 @@ frappe.ui.form.on("Journal Entry Account", {
 	refresh:function(frm, cdt, cdn){
 		console.log("yooooo");
 
-var isCostCenterRequired =  false;
+		var isCostCenterRequired =  false;
 
 		var accountID =  frappe.get_doc(cdt, cdn).account;
 		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
@@ -435,7 +435,7 @@ var isCostCenterRequired =  false;
 	account: function(frm, dt, dn) {
 		var isCostCenterRequired =  false;
 
-		var accountID =  frappe.get_doc(cdt, cdn).account;
+		var accountID =  frappe.get_doc(dt, dn).account;
 		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
 		if (res.root_type == "Expense" || res.root_type == "Income"){
 			isCostCenterRequired = 1;
