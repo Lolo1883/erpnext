@@ -417,7 +417,9 @@ frappe.ui.form.on("Journal Entry Account", {
 
 	account: function(frm, dt, dn) {
 		var row = locals[dt][dn];
-		console.log(row);
+		frm.doc.accounts.foreach(account => {
+			console.log(account);
+		});
 
 		var isCostCenterRequired =  false;
 
