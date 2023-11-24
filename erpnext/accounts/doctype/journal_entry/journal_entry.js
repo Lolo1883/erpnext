@@ -431,6 +431,8 @@ frappe.ui.form.on("Journal Entry Account", {
             // Toggle the 'reqd' property of the 'cost_center' field
             costCenterField.reqd = isCostCenterRequired;
 			cur_frm.refresh_fields('accounts');
+			frm.refresh_field('accounts');
+			cur_frm.refresh_field('accounts');
 			console.log(costCenterField);
         }
 
