@@ -425,8 +425,13 @@ frappe.ui.form.on("Journal Entry Account", {
 		}else{
 			isCostCenterRequired = 0;
 		}
-		frm.fields_dict['accounts'].grid.get_field('markz_tklfa').df.reqd = isCostCenterRequired;
-        frm.fields_dict['accounts'].grid.refresh_field('markz_tklfa');
+		var costCenterField = frappe.get_meta(cdt).fields.find(field => field.fieldname === 'markz_tklfa');
+
+        if (costCenterField) {
+            // Toggle the 'reqd' property of the 'cost_center' field
+            costCenterField.reqd = isCostCenterRequired;
+            frm.fields_dict['accounts'].grid.refresh_field('markz_tklfa');
+        }
 
 		});
 
