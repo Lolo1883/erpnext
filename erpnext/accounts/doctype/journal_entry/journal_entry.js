@@ -397,6 +397,7 @@ cur_frm.cscript.validate = function(doc,cdt,cdn) {
 frappe.ui.form.on("Journal Entry Account", {
 
 	refresh:function(frm, cdt, cdn){
+		console.log("yooooo");
 
 var isCostCenterRequired =  false;
 
