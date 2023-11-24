@@ -421,15 +421,13 @@ frappe.ui.form.on("Journal Entry Account", {
 		var accountID =  frappe.get_doc(dt, dn).account;
 		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
 		if (res.root_type == "Expense" || res.root_type == "Income"){
-			isCostCenterRequired = true;
+			isCostCenterRequired = 1;
 		}else{
-			isCostCenterRequired = false;
+			isCostCenterRequired = 0;
 		}
 		});
 
-		frm.set_df_property("markz_tklfa",  "reqd", isCostCenterRequired);
-		frm.toggle_reqd("markz_tklfa", isCostCenterRequired);
-
+		frm.set_df_property('markz_tklfa', 'reqd', isCostCenterRequired);
 
 
 		erpnext.journal_entry.set_account_balance(frm, dt, dn);
