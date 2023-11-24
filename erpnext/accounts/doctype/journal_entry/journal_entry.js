@@ -27,6 +27,15 @@ frappe.ui.form.on("Journal Entry", {
 				};
 				frappe.set_route("query-report", "General Ledger");
 			}, __('View'));
+
+			$.each(frm.doc.accounts || [], function(i, row) {
+				// Check your condition and toggle the 'cost_center' field
+				if (true) {
+					frm.toggle_reqd('accounts', i, 'markz_tklfa', true);
+				} else {
+					frm.toggle_reqd('accounts', i, 'markz_tklfa', false);
+				}
+			});
 		}
 
 		if(frm.doc.docstatus==1) {
