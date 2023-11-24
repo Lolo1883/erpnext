@@ -417,7 +417,7 @@ frappe.ui.form.on("Journal Entry Account", {
 
 	account: function(frm, dt, dn) {
 		$.each(frm.doc.accounts || [], function(i, row) {
-			console.log(row);
+			console.log(row.markz_tklfa);
 		})
 
 		var isCostCenterRequired =  false;
