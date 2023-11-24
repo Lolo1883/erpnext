@@ -419,9 +419,9 @@ frappe.ui.form.on("Journal Entry Account", {
 		var accountID =  frappe.get_doc(dt, dn).account;
 		var values  = frappe.db.get_doc("Account", accountID).then(function(res){
 		if (res.root_type == "Expense" || res.root_type == "Income"){
-			frm.set_df_property("cost_center1",  "reqd", true);
+			frappe.model.set_df_property("cost_center1",  "reqd", true);
 		}else{
-			frm.set_df_property("cost_center1",  "reqd", false);
+			frappe.model.set_df_property("cost_center1",  "reqd", false);
 		}
 		});
 		erpnext.journal_entry.set_account_balance(frm, dt, dn);
