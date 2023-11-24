@@ -433,7 +433,9 @@ frappe.ui.form.on("Journal Entry Account", {
 			cur_frm.refresh_fields('accounts');
 			frm.refresh_field('accounts');
 			cur_frm.refresh_field('accounts');
-			console.log(costCenterField);
+
+
+			console.log(frm);
         }
 
 		});
