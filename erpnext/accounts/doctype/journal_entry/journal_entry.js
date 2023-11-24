@@ -428,6 +428,7 @@ frappe.ui.form.on("Journal Entry Account", {
 		});
 
 		frm.set_df_property("markz_tklfa",  "reqd", isCostCenterRequired);
+		frm.toggle_reqd("markz_tklfa", isCostCenterRequired);
 
 
 
