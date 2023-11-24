@@ -425,12 +425,10 @@ frappe.ui.form.on("Journal Entry Account", {
 		}else{
 			isCostCenterRequired = 0;
 		}
-		});
+		frm.fields_dict['accounts'].grid.get_field('markz_tklfa').df.reqd = isCostCenterRequired;
+        frm.fields_dict['accounts'].grid.refresh_field('markz_tklfa');
 
-		console.log(frm.fields_dict);
-		var csCenter = frm.fields_dict['accounts'].grid.get_field('markz_tklfa');
-		csCenter.toggle_reqd(isCostCenterRequired);
-		frm.refresh_field('accounts');
+		});
 
 
 		erpnext.journal_entry.set_account_balance(frm, dt, dn);
